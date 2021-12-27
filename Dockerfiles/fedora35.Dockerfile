@@ -12,6 +12,19 @@ RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate &&
 
 COPY specs/ansible.spec /compile
 RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && pyinstaller /compile/ansible.spec'
+WORKDIR /static
+
+
+RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && staticx --strip --loglevel ERROR /compile/dist/ansible-playbook /static/ansible-playbook'
+
+#RUN cp /static/ansible-playbook /static/ansible
+#RUN cp /static/ansible-playbook /static/ansible-inventory
+
+RUN /static/ansible-playbook --help
+RUN /static/ansible-playbook --version
+#RUN /static/ansible-inventory --help
+#RUN /static/ansible --help
+
 
 #RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && pip install /staticx'
 #RUN bash -c 'source /root/.ansible-build-venv/bin/activate && pip install /ansible-4.9.0'
