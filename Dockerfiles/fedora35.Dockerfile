@@ -10,31 +10,16 @@ WORKDIR /compile
 
 RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && cp $(command -v ansible-playbook) /compile/ansible-playbook.py'
 
+COPY specs/ansible-playbook.spec /compile
 COPY specs/ansible.spec /compile
-RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && pyinstaller /compile/ansible.spec'
+RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && pyinstaller /compile/ansible-playbook.spec'
 WORKDIR /static
 
 
 RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && staticx --strip --loglevel ERROR /compile/dist/ansible-playbook /static/ansible-playbook'
 
-#RUN cp /static/ansible-playbook /static/ansible
-#RUN cp /static/ansible-playbook /static/ansible-inventory
-
 RUN /static/ansible-playbook --help
 RUN /static/ansible-playbook --version
-#RUN /static/ansible-inventory --help
-#RUN /static/ansible --help
 
-
-#RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && pip install /staticx'
-#RUN bash -c 'source /root/.ansible-build-venv/bin/activate && pip install /ansible-4.9.0'
-#RUN bash -c 'source /root/.ansible-build-venv/bin/activate && pyinstaller ansible.spec'
-#RUN bash -c 'python3 -m pip install staticx && find /compile/dist -type f | while read -r f; do staticx --strip --loglevel $LOG_LEVEL /compile/dist/$(basename $f) /compile/dist-static/$(basename $f); done'
-#RUN bash -c 'find /compile/dist /compile/dist-static -type f > /files.txt'
-
-#RUN bash -c 'source /root/.ansible-build-venv/bin/activate && pip install -q -U pip && pip install six pyinstaller staticx -q'
-#
-#WORKDIR /compile
-#COPY bin/passh ansi bin/staticx /compile/
-#
-#RUN python3 -m pip install staticx
+#RUN ldd /compile/dist/*
+#RUN ldd /static/*||true

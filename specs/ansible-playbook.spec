@@ -2,7 +2,7 @@
 import os, six, ansible
 block_cipher = None
 
-a = Analysis(['ansible.py'],
+a = Analysis(['ansible-playbook.py'],
              pathex=None,
              binaries=None,
              datas=[
@@ -24,7 +24,7 @@ exe = EXE(pyz,
           a.binaries,
           a.zipfiles,
           a.datas,
-          name='ansible',
+          name='ansible-playbook',
           debug=False,
           strip=False,
           upx=True,
