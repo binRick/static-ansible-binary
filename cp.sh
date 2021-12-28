@@ -4,6 +4,7 @@ eval "$(command cat vars.sh)"
 
 BD=$(pwd)/binaries/$DISTRO
 [[ -d BD ]] || mkdir -p $BD
+BINARIES="ansible-playbook ansible-runner"
 
 NOW=$(date +%s)
 CN=$DISTRO-$NOW
@@ -24,8 +25,9 @@ cleanup(){
 }
 trap cleanup EXIT
 
-
-docker_cp /static/ansible-playbook $BD/ansible-playbook
+for B in $BINARIES; do
+  docker_cp /static/$B $BD/$B
+done
 
 
 
