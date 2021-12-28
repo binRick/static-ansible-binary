@@ -5,7 +5,8 @@ ENV ANSIBLE_VERSION=4.9.0
 RUN dnf -y install binutils python3 python3-setuptools rsync findutils python3-wheel pv python3-pip python3-devel bat less patchelf glibc glibc-devel glibc-static glibc-utils
 RUN python3 -m venv /root/.ansible-build-venv
 RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && pip install -q -U pip && pip install six watchdog pyinstaller staticx'
-
+COPY dist/upx-3.96-amd64_linux/upx /usr/bin/upx
+RUN upx --version
 
 FROM fedora35-builder as fedora35-ansible-playbook
 WORKDIR /compile

@@ -1,5 +1,5 @@
 # -*- mode: python -*-
-import os, six, ansible
+import os, six, ansible, yaml
 block_cipher = None
 
 a = Analysis(['ansible-playbook.py'],
@@ -9,7 +9,7 @@ a = Analysis(['ansible-playbook.py'],
                  (six.__file__, '.'),
                  (os.path.dirname(ansible.__file__), 'ansible')
              ],
-             hiddenimports=['uuid', 'ansible', 'configparser', 'smtplib', 'logging.handlers', 'distutils.version', 'pty', 'watchdog', 'watchdog.observers', 'watchdog.events', 'ansible.plugins.callback.*', 'email.mime', 'ansible.cli.connection', 'email.mime.*', 'ansible.constants', 'ansible.*'],
+             hiddenimports=['uuid', 'ansible', 'configparser', 'smtplib', 'logging.handlers', 'distutils.version', 'pty', 'watchdog', 'watchdog.observers', 'watchdog.events', 'ansible.plugins.callback.*', 'email.mime', 'ansible.cli.connection', 'email.mime.*', 'ansible.constants', 'ansible.*', 'yaml'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
