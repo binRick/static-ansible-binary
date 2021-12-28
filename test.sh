@@ -17,3 +17,6 @@ TARGET=test-$DISTRO dot
 
 DISTRO=fedora32
 TARGET=test-$DISTRO dot
+
+DISTRO=fedora31
+TARGET=test-$DISTRO dot
