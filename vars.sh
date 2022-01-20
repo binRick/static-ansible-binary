@@ -1,1 +1,1 @@
-DISTRO=${DISTRO:-fedora35}
+DISTRO=${DISTRO:-fedora32}
