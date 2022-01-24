@@ -1,4 +1,4 @@
-FROM fedora:35 as fedora35-builder
+FROM docker.io/fedora:35 as fedora35-builder
 ENV FEDORA_VERSION=35
 RUN bash --norc --noprofile -c 'env|grep FEDORA_VERSION'
 ENV ANSIBLE_VERSION=4.9.0
