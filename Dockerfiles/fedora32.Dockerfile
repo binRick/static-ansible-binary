@@ -14,12 +14,13 @@ FROM fedora32-builder as fedora32-ansible-playbook
 WORKDIR /compile
 ADD dist/ansible-4.9.0.tar.gz /
 RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && pip install -q -U pip && pip install /ansible-4.9.0'
-RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && cp $(command -v ansible-playbook) /compile/ansible-playbook.py'
+RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && ansible-playbook --version'
+RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && command -v ansible-playbook'
 
-RUN /compile/ansible-playbook.py --version
+#RUN /compile/ansible-playbook.py --version
 
-COPY specs/ansible-playbook.spec /compile
-RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && pyinstaller /compile/ansible-playbook.spec'
+#COPY specs/ansible-playbook.spec /compile
+RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && pyinstaller $(command -v ansible-playbook)'
 #WORKDIR /static
 #RUN bash --norc --noprofile -c 'source /root/.ansible-build-venv/bin/activate && staticx --strip --loglevel ERROR /compile/dist/ansible-playbook /static/ansible-playbook'
 #RUN /static/ansible-playbook --help

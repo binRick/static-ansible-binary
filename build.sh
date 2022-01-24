@@ -8,5 +8,5 @@ bt(){
 }
 
 
-DF=fedora35.Dockerfile TARGET=$DISTRO-ansible-playbook bt
+DF=fedora32.Dockerfile TARGET=$DISTRO-ansible-playbook bt
 #TARGET=$DISTRO-podman-compose bt
